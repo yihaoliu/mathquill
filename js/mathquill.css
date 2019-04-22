@@ -449,3 +449,27 @@
   top: 0;
 
 }
+.diy-nsymbol{
+  position: relative;
+  padding: 0 10px !important;
+  display: inline-block;
+  min-width: 20px;
+  vertical-align: text-top;
+}
+.diy-nsymbol::after{
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  background: #000;
+  height: 1px;
+  left: 0;
+  top: 50%;
+  transform-origin: center;
+   
+  transform:rotate(-10deg);
+-ms-transform:rotate(-10deg); 	/* IE 9 */
+-moz-transform:rotate(-10deg); 	/* Firefox */
+-webkit-transform:rotate(-10deg ); /* Safari 和 Chrome */
+-o-transform:rotate(-10deg); 
+}

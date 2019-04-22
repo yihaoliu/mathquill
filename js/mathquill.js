@@ -1044,6 +1044,7 @@ function getInterface(v) {
   MQ.prototype = AbstractMathQuill.prototype;
 
   APIClasses.EditableField = P(AbstractMathQuill, function(_, super_) {
+    
     _.__mathquillify = function() {
       super_.__mathquillify.apply(this, arguments);
       this.__controller.editable = true;
@@ -2270,7 +2271,9 @@ Controller.open(function(_) {
     textarea = this.textarea = $(textarea).appendTo(textareaSpan);
 
     var ctrlr = this;
-    ctrlr.cursor.selectionChanged = function() { ctrlr.selectionChanged(); };
+    ctrlr.cursor.selectionChanged = function() { 
+      console.log("kkkk")
+      ctrlr.selectionChanged(); };
     ctrlr.container.bind('copy', function() { ctrlr.setTextareaSelection(); });
   };
   _.selectionChanged = function() {
@@ -2725,8 +2728,23 @@ var MathBlock = P(MathElement, function(_, super_) {
       this.join('text')
     ;
   };
+  function rotateChange(){
+    // var nsymbol = $('.diy-nsymbol-router');
+    var nsymbol =  document.querySelectorAll('.diy-nsymbol-router')
+    console.log(nsymbol,'ff')
+    nsymbol.forEach(function(item){
+      var width = item.offsetWidth;
+      var height = item.offsetHeight;
+      console.log(Math.atan2(height,width))
+      item.style.transform = 'rotate('+Math.atan2(height,width)+'deg )'
+      
 
+    })
+    
+  }
   _.keystroke = function(key, e, ctrlr) {
+    console.log('----------')
+    // rotateChange();
     if (ctrlr.options.spaceBehavesLikeTab
         && (key === 'Spacebar' || key === 'Shift-Spacebar')) {
       e.preventDefault();
@@ -4211,6 +4229,7 @@ LatexCmds.overrightarrow = bind(Style, '\\overrightarrow', 'span', 'class="mq-no
 LatexCmds.overleftarrow = bind(Style, '\\overleftarrow', 'span', 'class="mq-non-leaf mq-overarrow mq-arrow-left"');
 //DIY
 LatexCmds.Vert = bind(Style,'\\Vert','span', 'class="mq-non-leaf diy-vert"');
+LatexCmds.nsymbol = bind(Style,'\\nsymbol','span', 'class="mq-non-leaf diy-nsymbol diy-nsymbol-router"')
 
 // `\textcolor{color}{math}` will apply a color to the given math content, where
 // `color` is any valid CSS Color Value (see [SitePoint docs][] (recommended),
