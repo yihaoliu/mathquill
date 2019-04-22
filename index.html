@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./js/mathquill.css">
+<script src="./js/jq.js"></script>
+<script src="./js/mathquill.js"></script>
+<style>
+    input {
+        height: 50px;
+        width: 500px;
+        font-size: 20px;
+        padding: 10px;
+    }
+</style>
+
+<body>
+    <!-- <input id="input" type="text"> -->
+    <p>Type math here: <span id="math-field"></span></p>
+    <p>LaTeX of what you typed: <span id="latex"></span></p>
+
+
+    <script>
+        var mathFieldSpan = document.getElementById('math-field');
+        var inputDom = document.getElementById('input');
+        var latexSpan = document.getElementById('latex');
+
+        var MQ = MathQuill.getInterface(2); // for backcompat
+        var mathField = MQ.MathField(mathFieldSpan, {
+            spaceBehavesLikeTab: true, // configurable
+            handlers: {
+                edit: function () { // useful event handlers
+                    latexSpan.textContent = mathField.latex(); // simple API
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
